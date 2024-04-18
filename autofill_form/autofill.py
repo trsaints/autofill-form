@@ -2,6 +2,8 @@ import pyautogui
 from time import sleep
 from window_service import switch_window
 from arg_service import get_args
+from keyboard_service import is_key
+
 
 def autofill(commands):
     args = get_args()
@@ -21,7 +23,12 @@ def autofill(commands):
         parsed_countdown = int(countdown)
 
         switch_window(parsed_pid)
-        pyautogui.press(key, parsed_presses)
+
+        if is_key(key):
+            pyautogui.press(key, presses=parsed_presses)
+        else:
+            pyautogui.typewrite(key)
+
         print(f'Pressing {key} {parsed_presses} times')
 
         if parsed_countdown > 0:
