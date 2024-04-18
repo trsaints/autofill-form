@@ -11,7 +11,7 @@ def autofill(commands):
     parsed_pid = int(pid)
 
     for (command) in commands:
-        [key, presses, countdown] = command
+        [key, presses, countdown, interval] = command
 
         column_label = commands[0]
 
@@ -21,13 +21,14 @@ def autofill(commands):
 
         parsed_presses = int(presses)
         parsed_countdown = int(countdown)
+        parsed_interval = float(interval)
 
         switch_window(parsed_pid)
 
         if is_key(key):
             pyautogui.press(key, presses=parsed_presses)
         else:
-            pyautogui.typewrite(key)
+            pyautogui.typewrite(key, interval=parsed_interval)
 
         print(f'Pressing {key} {parsed_presses} times')
 
